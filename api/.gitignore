@@ -3,3 +3,7 @@ node_modules/
 dist/
 package-lock.json
 envs/
+.env*
+.flaskenv*
+!.env.project
+!.env.vault

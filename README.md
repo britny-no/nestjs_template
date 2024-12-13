@@ -6,8 +6,8 @@ docker-compose.infra.yaml: 개발, Jenkins(ci/cd) 환경 구축
 
 ```
 
-
 ## Jenkins 사용시(굳이? github에서 pr에 따라 hooking하는게 더 나을듯)
+
 ```
 1. docker compose -f docker-compose.infra.yaml up
 2. NodeJS 플러그인 설치:
