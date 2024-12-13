@@ -23,3 +23,15 @@ docker-compose.infra.yaml: 개발, Jenkins(ci/cd) 환경 구축
    -Pipeline 섹션에서 Jenkinsfile을 직접 입력하거나 Git 저장소에서 Jenkinsfile을 로드할 수 있습니다.
    *Git 저장소에서 Jenkinsfile을 로드하려면, Pipeline script from SCM을 선택하고, 저장소 URL을 입력합니다. 이 때, Jenkinsfile이 저장소의 루트 디렉토리에 위치해야 합니다.
 ```
+
+## dotenv-vault로 환경변수 관리
+
+dotenv-vault고려해 각 NODE_ENV = production || staging || development
+
+```
+1. dotenv-vault 로그인후 vault 키값로 팀원별로 연동
+2. 기존 키값 pull
+   npx dotenv-vault@latest pull {production || staging || development}
+3. 새로운 키값 push
+   npx dotenv-vault@latest push {production || staging || development}
+```

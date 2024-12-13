@@ -2,8 +2,9 @@ coverage/
 node_modules/
 dist/
 package-lock.json
-envs/
-.env*
+
+deploy.prod.sh
+deploy.qa.sh
 .flaskenv*
-!.env.project
-!.env.vault
+!.env/.env.project
+!.env/.env.vault
