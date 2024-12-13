@@ -5,16 +5,16 @@
       "script": "/api/dist/main.js",
       "instances": "0",
       "exec_mode": "cluster",
-      "env_dev": {
-        "NODE_ENV": "dev",
+      "env_development": {
+        "NODE_ENV": "development",
         "TZ": "Asia/Seoul"
       },
-      "env_qa": {
-        "NODE_ENV": "qa",
+      "env_staging": {
+        "NODE_ENV": "staging",
         "TZ": "Asia/Seoul"
       },
-      "env_prod": {
-        "NODE_ENV": "prod",
+      "env_production": {
+        "NODE_ENV": "production",
         "TZ": "Asia/Seoul"
       },
       "ignore_watch": ["*.log"]

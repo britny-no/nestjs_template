@@ -4,3 +4,8 @@ postgres/
 pgadmin
 redis/
 jenkins_home/
+
+.env*
+.flaskenv*
+!.env.project
+!.env.vault

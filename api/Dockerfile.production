@@ -11,7 +11,6 @@ FROM node:20-alpine
 
 WORKDIR /service
 RUN npm install pm2 -g
-
 COPY --from=builder /service/dist /service/dist
 COPY --from=builder /service/node_modules /service/node_modules
 COPY --from=builder /service/package.json /service/package.json
@@ -19,9 +18,9 @@ COPY --from=builder /service/envs ./envs
 COPY --from=builder /service/pm2.docker.json /service/pm2.docker.json
 COPY --from=builder /service/tinker-360202-3eb53b38ce3c.json /service/tinker-360202-3eb53b38ce3c.json
 
-ENV NODE_ENV dev
+ENV NODE_ENV production
 ENV TZ Asia/Seoul
 
 EXPOSE 3000
 # ENTRYPOINT [ "node", "/service/dist/main"]
-ENTRYPOINT [ "pm2-runtime", "--json", "pm2.docker.json", "--env", "dev"]
+ENTRYPOINT [ "pm2-runtime", "--json", "pm2.docker.json", "--env", "production"]

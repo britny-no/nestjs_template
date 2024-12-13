@@ -26,7 +26,7 @@ docker-compose.infra.yaml: 개발, Jenkins(ci/cd) 환경 구축
 
 ## dotenv-vault로 환경변수 관리
 
-dotenv-vault고려해 각 NODE_ENV = production || staging || development
+dotenv-vault고려해 각 NODE_ENV = production || staging(=qa) || development
 
 ```
 1. dotenv-vault 로그인후 vault 키값로 팀원별로 연동

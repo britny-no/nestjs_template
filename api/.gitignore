@@ -3,8 +3,5 @@ node_modules/
 dist/
 package-lock.json
 
-deploy.prod.sh
-deploy.qa.sh
-.flaskenv*
-!.env/.env.project
-!.env/.env.vault
+deploy.production.sh
+deploy.staging.sh
