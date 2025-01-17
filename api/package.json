@@ -9,7 +9,7 @@
     "build": "nest build",
     "format": "prettier --write \"src/**/*.ts\" \"test/**/*.ts\"",
     "start": "nest start",
-    "start:development": "cd envs && npx dotenv-vault@latest pull development &&  npx dotenv-vault@latest pull staging &&  npx dotenv-vault@latest pull production && cd .. && cross-env NODE_ENV=dev nest start --watch",
+    "start:development": "cross-env NODE_ENV=dev nest start --watch",
     "start:staging": "cross-env NODE_ENV=qa nest start --watch",
     "start:debug": "TZ=Asia/Seoul nest start --debug --watch",
     "start:production": "NODE_ENV=production TZ=Asia/Seoul node dist/main",
