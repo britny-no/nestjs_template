@@ -1,22 +1,21 @@
 FROM node:20 AS builder
 
-WORKDIR /service
+WORKDIR /api
 COPY . .
 
-RUN chmod +x ./wait-for-it.sh
+RUN chmod +x ./api/wait-for-it.sh
 RUN npm cache clean --force && npm install
 RUN npm run build
 
 FROM node:20-alpine
 
-WORKDIR /service
+WORKDIR /api
+
 RUN npm install pm2 -g
-COPY --from=builder /service/dist /service/dist
-COPY --from=builder /service/node_modules /service/node_modules
-COPY --from=builder /service/package.json /service/package.json
-COPY --from=builder /service/envs ./envs
-COPY --from=builder /service/pm2.docker.json /service/pm2.docker.json
-COPY --from=builder /service/tinker-360202-3eb53b38ce3c.json /service/tinker-360202-3eb53b38ce3c.json
+COPY --from=builder /api/dist /api/dist
+COPY --from=builder /api/node_modules /api/node_modules
+COPY --from=builder /api/package.json /api/package.json
+COPY --from=builder /api/pm2.docker.json /api/pm2.docker.json
 
 ENV TZ Asia/Seoul
 
