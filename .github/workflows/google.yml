@@ -13,7 +13,7 @@ jobs:
   setup-build-publish:
     name: "Setup, Build, and Publish to Artifact Registry"
     runs-on: "ubuntu-latest"
-    environment: "production"
+    environment: "qa"
 
     permissions:
       contents: "read"
