@@ -5,3 +5,5 @@ package-lock.json
 
 deploy.production.sh
 deploy.staging.sh
+
+.env
