@@ -33,7 +33,7 @@ jobs:
           # service_account: "${{ secrets.SERVICE_ACCOUNT }}"
 
       - name: "Check token"
-      run: echo "${{ steps.auth.outputs.token }}"
+        run: echo "${{ steps.auth.outputs.token }}"
 
       # Authenticate Docker to Google Cloud Artifact Registry
       - name: "Docker Auth"
