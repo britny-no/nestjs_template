@@ -56,7 +56,7 @@ jobs:
           GAR_LOCATION: ${{ secrets.GAR_LOCATION }}
           REPOSITORY: ${{ secrets.REPOSITORY }}
         run: |-
-          DOCKER_TAG="${GAR_LOCATION}-docker.pkg.dev/${PROJECT_ID}/${REPOSITORY}/${IMAGE}:${GITHUB_SHA}-${BRANCH}"
+          DOCKER_TAG="asia-northeast3-docker.pkg.dev/tinker-modelcut/tinker-modelcut-backend:1"
 
           docker build \
             --file api/Dockerfile \
