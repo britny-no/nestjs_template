@@ -32,9 +32,7 @@ jobs:
           service_account: "${{ secrets.SERVICE_ACCOUNT }}"
 
       - name: "Check ENV"
-        run: echo "${{ secrets.PROJECT_ID }}"
-        run: echo "${{ secrets.GAR_LOCATION }}"
-        run: echo "${{ secrets.REPOSITORY }}"
+        run: echo "${{ secrets.PROJECT_ID }}", "${{ secrets.GAR_LOCATION }}",  "${{ secrets.REPOSITORY }}"
 
       # Authenticate Docker to Google Cloud Artifact Registry
       - name: "Docker Auth"
