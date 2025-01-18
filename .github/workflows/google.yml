@@ -59,6 +59,7 @@ jobs:
           # BRANCH: $GITHUB_ENV
         run: |-
           DOCKER_TAG="${GAR_LOCATION}-docker.pkg.dev/${PROJECT_ID}/${REPOSITORY}/${IMAGE}:${GITHUB_SHA}"
+          echo "Pushing Docker image: ${DOCKER_TAG}"
 
           docker build \
             --file api/Dockerfile \
