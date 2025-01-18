@@ -3,7 +3,7 @@ FROM node:20 AS builder
 WORKDIR /api
 COPY . .
 
-RUN chmod +x ./api/wait-for-it.sh
+RUN chmod +x ./wait-for-it.sh
 RUN npm cache clean --force && npm install
 RUN npm run build
 
