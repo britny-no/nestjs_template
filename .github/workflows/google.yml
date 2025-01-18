@@ -53,9 +53,9 @@ jobs:
       # Build the Docker image
       - name: "Build and push Docker container"
         env:
-          PROJECT_ID: ${{ secrets.PROJECT_ID }}
-          GAR_LOCATION: ${{ secrets.GAR_LOCATION }}
-          REPOSITORY: ${{ secrets.REPOSITORY }}
+          PROJECT_ID: "${{ secrets.PROJECT_ID }}"
+          GAR_LOCATION: "${{ secrets.GAR_LOCATION }}"
+          REPOSITORY: "${{ secrets.REPOSITORY }}"
         run: |-
           DOCKER_TAG="${GAR_LOCATION}-docker.pkg.dev/${PROJECT_ID}/${REPOSITORY}/${IMAGE}:${GITHUB_SHA}-${BRANCH}"
 
