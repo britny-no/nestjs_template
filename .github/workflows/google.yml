@@ -28,12 +28,13 @@ jobs:
         name: "Authenticate to Google Cloud"
         uses: "google-github-actions/auth@v2"
         with:
-          # credentials_json: ${{ secrets.GCP_SA_KEY }}
           workload_identity_provider: "${{ secrets.WORKLOAD_IDENTITY_PROVIDER }}"
           service_account: "${{ secrets.SERVICE_ACCOUNT }}"
 
-      - name: "Check token"
-        run: echo "${{ steps.auth.outputs.auth_token }}"
+      - name: "Check ENV"
+        run: echo "${{ secrets.PROJECT_ID }}"
+        run: echo "${{ secrets.GAR_LOCATION }}"
+        run: echo "${{ secrets.REPOSITORY }}"
 
       # Authenticate Docker to Google Cloud Artifact Registry
       - name: "Docker Auth"
