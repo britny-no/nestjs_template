@@ -8,6 +8,7 @@ on:
 
 env: # Define static environment variables here
   IMAGE: "static-site"
+  ACTIONS_STEP_DEBUG: true
 
 jobs:
   setup-build-publish:
