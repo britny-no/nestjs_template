@@ -56,9 +56,9 @@ jobs:
           PROJECT_ID: "${{ secrets.PROJECT_ID }}"
           GAR_LOCATION: "${{ secrets.GAR_LOCATION }}"
           REPOSITORY: "${{ secrets.REPOSITORY }}"
-          BRANCH: $GITHUB_ENV
+          # BRANCH: $GITHUB_ENV
         run: |-
-          DOCKER_TAG="${GAR_LOCATION}-docker.pkg.dev/${PROJECT_ID}/${REPOSITORY}/${IMAGE}:${GITHUB_SHA}-${BRANCH}"
+          DOCKER_TAG="${GAR_LOCATION}-docker.pkg.dev/${PROJECT_ID}/${REPOSITORY}/${IMAGE}:${GITHUB_SHA}"
 
           docker build \
             --file api/Dockerfile \
