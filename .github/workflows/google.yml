@@ -21,26 +21,23 @@ jobs:
 
     steps:
       - name: "Checkout"
-        uses: "actions/checkout@v2"
+        uses: "actions/checkout@692973e3d937129bcbf40652eb9f2f61becf3332" # actions/checkout@v4
 
       # Configure Workload Identity Federation and generate an access token.
       - id: "auth"
         name: "Authenticate to Google Cloud"
-        uses: "google-github-actions/auth@v2"
+        uses: "google-github-actions/auth@f112390a2df9932162083945e46d439060d66ec2" # google-github-actions/auth@v2
         with:
           workload_identity_provider: "${{ secrets.WORKLOAD_IDENTITY_PROVIDER }}"
           service_account: "${{ secrets.SERVICE_ACCOUNT }}"
 
       # Authenticate Docker to Google Cloud Artifact Registry
       - name: "Docker Auth"
-        uses: "docker/login-action@v2"
+        uses: "docker/login-action@9780b0c442fbb1117ed29e0efdff1e18412f7567" # docker/login-action@v3
         with:
           username: "oauth2accesstoken"
           password: "${{ steps.auth.outputs.auth_token }}"
           registry: "${{ secrets.GAR_LOCATION }}-docker.pkg.dev"
-
-      - name: "Check Token"
-        run: echo "${{ steps.auth.outputs.auth_token }}" | base64 -d | jq
 
       # Set branch-specific environment variables
       - name: "Set branch-specific environment variables"
