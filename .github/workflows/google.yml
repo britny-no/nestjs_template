@@ -30,7 +30,7 @@ jobs:
         uses: "google-github-actions/auth@f112390a2df9932162083945e46d439060d66ec2" # google-github-actions/auth@v2
         with:
           workload_identity_provider: "${{ secrets.WORKLOAD_IDENTITY_PROVIDER }}"
-          service_account: "${{ secrets.SERVICE_ACCOUNT }}"
+          # service_account: "${{ secrets.SERVICE_ACCOUNT }}"
 
       # Authenticate Docker to Google Cloud Artifact Registry
       - name: "Docker Auth"
@@ -56,7 +56,7 @@ jobs:
           GAR_LOCATION: ${{ secrets.GAR_LOCATION }}
           REPOSITORY: ${{ secrets.REPOSITORY }}
         run: |-
-          DOCKER_TAG="asia-northeast3-docker.pkg.dev/tinker-modelcut/tinker-modelcut-backend:1"
+          DOCKER_TAG="${GAR_LOCATION}-docker.pkg.dev/${PROJECT_ID}/${REPOSITORY}/${IMAGE}:${GITHUB_SHA}-${BRANCH}"
 
           docker build \
             --file api/Dockerfile \
