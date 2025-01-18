@@ -31,9 +31,6 @@ jobs:
           workload_identity_provider: "${{ secrets.WORKLOAD_IDENTITY_PROVIDER }}"
           service_account: "${{ secrets.SERVICE_ACCOUNT }}"
 
-      - name: "Check ENV"
-        run: echo "${{ secrets.PROJECT_ID }}", "${{ secrets.GAR_LOCATION }}",  "${{ secrets.REPOSITORY }}"
-
       # Authenticate Docker to Google Cloud Artifact Registry
       - name: "Docker Auth"
         uses: "docker/login-action@v2"
@@ -41,6 +38,9 @@ jobs:
           username: "oauth2accesstoken"
           password: "${{ steps.auth.outputs.auth_token }}"
           registry: "${{ secrets.GAR_LOCATION }}-docker.pkg.dev"
+
+      - name: "Check Token"
+        run: echo "${{ steps.auth.outputs.auth_token }}" | base64 -d | jq
 
       # Set branch-specific environment variables
       - name: "Set branch-specific environment variables"
