@@ -41,13 +41,13 @@ jobs:
           registry: "${{ secrets.GAR_LOCATION }}-docker.pkg.dev"
 
       # Set branch-specific environment variables
-      - name: "Set branch-specific environment variables"
-        run: |
-          if [[ "${GITHUB_REF}" == "refs/heads/main" ]]; then
-            echo "BRANCH=main" >> $GITHUB_ENV
-          elif [[ "${GITHUB_REF}" == "refs/heads/qa" ]]; then
-            echo "BRANCH=qa" >> $GITHUB_ENV
-          fi
+      # - name: "Set branch-specific environment variables"
+      #   run: |
+      #     if [[ "${GITHUB_REF}" == "refs/heads/main" ]]; then
+      #       echo "BRANCH=main" >> $GITHUB_ENV
+      #     elif [[ "${GITHUB_REF}" == "refs/heads/qa" ]]; then
+      #       echo "BRANCH=qa" >> $GITHUB_ENV
+      #     fi
 
       # Build the Docker image
       - name: "Build and push Docker container"
