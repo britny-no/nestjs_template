@@ -59,7 +59,7 @@ jobs:
       # Build the Docker image
       - name: "Build and push Docker container"
         run: |-
-          DOCKER_TAG="asia-northeast3-docker.pkg.dev/tinker-modelcut/tinker-modelcut-backend/${IMAGE}:${GITHUB_SHA}"
+          DOCKER_TAG="asia-northeast3-docker.pkg.dev/tinker-modelcut/tinker-modelcut-backend/hi:1"
 
           docker build \
             --file api/Dockerfile \
