@@ -5,6 +5,8 @@ on:
     branches:
       - "main"
       - "qa"
+    paths:
+      - images/*
 
 env: # Define static environment variables here
   PROJECT_ID: "${{ secrets.PROJECT_ID }}"
