@@ -5,8 +5,6 @@ on:
     branches:
       - "main"
       - "qa"
-    paths:
-      - images/*
 
 env: # Define static environment variables here
   PROJECT_ID: "${{ secrets.PROJECT_ID }}"
@@ -40,6 +38,7 @@ jobs:
         uses: "google-github-actions/auth@v2" # google-github-actions/auth@v2
         with:
           workload_identity_provider: "${{ env.WORKLOAD_IDENTITY_PROVIDER }}"
+          token_format: "access_token"
 
       - name: Set up Cloud SDK
         uses: google-github-actions/setup-gcloud@v1
@@ -49,7 +48,6 @@ jobs:
           gcloud auth configure-docker ${{env.GAR_LOCATION}}-docker.pkg.dev --quiet
 
       - name: Build and push Docker image
-        working-directory: ./images
         run: |-
           DOCKER_TAG="${env.GAR_LOCATION}-docker.pkg.dev/${env.PROJECT_ID}/${env.REPOSITORY}/${env.IMAGE}:${GITHUB_SHA}"
 
