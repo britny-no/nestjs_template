@@ -11,8 +11,8 @@ env: # Define static environment variables here
   GAR_LOCATION: "${{ secrets.GAR_LOCATION }}"
   REPOSITORY: "${{ secrets.REPOSITORY }}"
   WORKLOAD_IDENTITY_PROVIDER: "${{ secrets.WORKLOAD_IDENTITY_PROVIDER }}"
-  GCP_SA_KEY: "${{ secrets.GCP_SA_KEY }}"
-  SERVICE_ACCOUNT: "${{ secrets.GCP_SA_KEY }}"
+  GCP_CREDENTIALS: "${{ secrets.GCP_CREDENTIALS }}"
+  SERVICE_ACCOUNT: "${{ secrets.SERVICE_ACCOUNT }}"
   IMAGE: "static-site"
   ACTIONS_STEP_DEBUG: true
 
