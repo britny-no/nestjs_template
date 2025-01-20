@@ -1,6 +1,6 @@
 FROM node:20 AS builder
 
-WORKDIR /api
+WORKDIR /
 COPY . .
 
 RUN chmod +x ./wait-for-it.sh
@@ -9,13 +9,13 @@ RUN npm run build
 
 FROM node:20-alpine
 
-WORKDIR /api
+WORKDIR /
 
 RUN npm install pm2 -g
-COPY --from=builder /api/dist /api/dist
-COPY --from=builder /api/node_modules /api/node_modules
-COPY --from=builder /api/package.json /api/package.json
-COPY --from=builder /api/pm2.docker.json /api/pm2.docker.json
+COPY --from=builder /dist /dist
+COPY --from=builder /node_modules /node_modules
+COPY --from=builder /package.json /package.json
+COPY --from=builder /pm2.docker.json /pm2.docker.json
 
 ENV TZ Asia/Seoul
 
