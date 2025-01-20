@@ -1,11 +1,9 @@
-docker.env
-.DS_Store
-postgres/
-pgadmin
-redis/
-jenkins_home/
+coverage/
+node_modules/
+dist/
+package-lock.json
 
-.env*
-.flaskenv*
-!.env.project
-!.env.vault
+deploy.production.sh
+deploy.staging.sh
+
+.env
