@@ -14,6 +14,8 @@
 의존성 순환 체크: Dependency Cruiser
   npx depcruise --config dependency-cruiser.config.js src
 
+pre-commit: husky
+
 
 ```
 
