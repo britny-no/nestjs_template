@@ -31,6 +31,7 @@ pre-commit 설치
 # 전달 사항
 
 ```
-inflight@1.0.6은 무시
+-inflight@1.0.6은 일단 무시
+-pre-commit은 api 폴더에서 커밋해야 적용됨
 
 ```
