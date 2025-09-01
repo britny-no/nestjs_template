@@ -17,7 +17,9 @@
         "NODE_ENV": "production",
         "TZ": "Asia/Seoul"
       },
-      "ignore_watch": ["*.log"]
+      "ignore_watch": [
+        "*.log"
+      ]
     }
   ]
 }

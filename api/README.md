@@ -1,11 +1,36 @@
-## 기본 환경
+# 기본 환경
 
 ```
 
-1. 코드 컨벤션: ESLint + Prettier.
-2. 테스트: Jest로 테스트 커버리지 확인.
-2. 코드 중복 체크: Madge.
-3. 의존성 순환 체크: Dependency Cruiser.
-4. 복잡도 및 코드 분석: ESLint.
+코드 컨벤션: ESLint + Prettier
+  eslint.config.mjs
+
+테스트 & 테스트 커버리지: Jest
+  npm run test
+  npm run test:cov
+
+복잡도 및 코드 분석: ESLint
+
+의존성 순환 체크: Dependency Cruiser
+  npx depcruise --config dependency-cruiser.config.js src
+
+
+```
+
+# 기본 환경
+
+```
+
+pre-commit 설치
+  npx husky ini
+  
+```
+
+
+
+# 전달 사항
+
+```
+inflight@1.0.6은 무시
 
 ```
