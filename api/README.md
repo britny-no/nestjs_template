@@ -32,5 +32,6 @@ pre-commit 설치
 
 ```
 -inflight@1.0.6은 일단 무시
+-pre-commit은 api 폴더에서 커밋해야 적용됨
 
 ```
