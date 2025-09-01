@@ -38,5 +38,7 @@ pre-commit 설치
 - inflight@1.0.6은 일단 무시
 - pre-commit은 api 폴더에서 커밋해야 적용됨
 - huskey로 docker-compose.yml을 위한 루트 모듈 못둠
+- exception 종류: HttpException, DomainException
+  - 전통적 방식이면 HttpException 비중을 늘리고, CQRS에 NestJS 종속성을 줄이고 싶으면 DomainException 비중을 늘린다
 
 ```
