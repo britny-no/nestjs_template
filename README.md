@@ -37,5 +37,6 @@ pre-commit 설치
 ```
 - inflight@1.0.6은 일단 무시
 - pre-commit은 api 폴더에서 커밋해야 적용됨
+- huskey로 docker-compose.yml을 위한 루트 모듈 못둠
 
 ```
