@@ -16,6 +16,7 @@
 
 pre-commit: husky
   api 폴더속 .husky 없으면 초기화 필요
+    npx husky init
 
 
 ```
