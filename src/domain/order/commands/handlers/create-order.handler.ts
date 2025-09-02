@@ -1,0 +1,22 @@
+import { CommandHandler, ICommandHandler } from "@nestjs/cqrs";
+import { Inject } from "@nestjs/common";
+
+import { CreateOrderCommand } from "../create-order.command";
+import { Order } from "../../order.entity";
+import type { IOrderRepository } from "src/domain/order/order.repository";
+
+@CommandHandler(CreateOrderCommand)
+export class CreateOrderHandler implements ICommandHandler<CreateOrderCommand> {
+  constructor(
+    @Inject("IOrderRepository")
+    private readonly orderRepository: IOrderRepository,
+  ) {}
+
+  async execute(command: CreateOrderCommand): Promise<Order> {
+    const { id, item, quantity } = command;
+    const order = new Order(id, item, quantity);
+    await this.orderRepository.save(order);
+
+    return order;
+  }
+}

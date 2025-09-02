@@ -40,5 +40,5 @@ pre-commit 설치
 - huskey로 docker-compose.yml을 위한 루트 모듈 못둠
 - exception 종류: HttpException, DomainException
   - 전통적 방식이면 HttpException 비중을 늘리고, CQRS에 NestJS 종속성을 줄이고 싶으면 DomainException 비중을 늘린다
-
+- 핸들러에서 command/query/event 파라미터 사용되지 않으면, _앞에 붙이기
 ```
