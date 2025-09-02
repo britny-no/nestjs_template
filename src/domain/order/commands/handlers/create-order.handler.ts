@@ -5,7 +5,8 @@ import { CreateOrderCommand } from "../create-order.command";
 import { Order } from "../../order.entity";
 import type { IOrderRepository } from "src/domain/order/order.repository";
 import { OrderService } from "../../order.service";
-import { OrderAlreadyRegisteredException } from "../../order.exception";
+import { InfrastructureException } from "src/infrastructure/exceptions/infrastructure.exception";
+import { DomainException } from "src/domain/common/domain.exception";
 
 @CommandHandler(CreateOrderCommand)
 export class CreateOrderHandler implements ICommandHandler<CreateOrderCommand> {
@@ -25,10 +26,15 @@ export class CreateOrderHandler implements ICommandHandler<CreateOrderCommand> {
 
       return order;
     } catch (err) {
-      if (err instanceof OrderAlreadyRegisteredException) {
+      if (err instanceof DomainException) {
         throw new HttpException(
           "이미 등록된 주문입니다.",
           HttpStatus.BAD_REQUEST,
+        );
+      } else if (err instanceof InfrastructureException) {
+        throw new HttpException(
+          "시스템 오류가 발생했습니다.",
+          HttpStatus.INTERNAL_SERVER_ERROR,
         );
       }
       throw err;

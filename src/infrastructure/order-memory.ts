@@ -1,20 +1,33 @@
 import { IOrderRepository } from "src/domain/order/order.repository";
 import { Order } from "src/domain/order/order.entity";
+import { InfrastructureException } from "./exceptions/infrastructure.exception";
 
 export class InMemoryOrderRepository implements IOrderRepository {
   private orders: Order[] = [];
 
   async save(order: Order): Promise<void> {
-    this.orders.push(order);
-    return Promise.resolve();
+    try {
+      this.orders.push(order);
+      return Promise.resolve();
+    } catch (err) {
+      throw new InfrastructureException("DB Faile", err);
+    }
   }
 
   async findById(id: string): Promise<Order | undefined> {
-    const order = this.orders.find((order) => order.id === id);
-    return Promise.resolve(order);
+    try {
+      const order = this.orders.find((order) => order.id === id);
+      return Promise.resolve(order);
+    } catch (err) {
+      throw new InfrastructureException("DB Faile", err);
+    }
   }
 
   async findAll(): Promise<Order[]> {
-    return Promise.resolve([...this.orders]);
+    try {
+      return Promise.resolve([...this.orders]);
+    } catch (err) {
+      throw new InfrastructureException("DB Faile", err);
+    }
   }
 }
