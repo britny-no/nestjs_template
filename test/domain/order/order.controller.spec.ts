@@ -1,8 +1,9 @@
 import { Test, TestingModule } from "@nestjs/testing";
-import { OrderController } from "src/domain/order/order.controller";
+
 import { CommandBus, QueryBus } from "@nestjs/cqrs";
-import { CreateOrderCommand } from "src/domain/order/commands/create-order.command";
-import { GetOrderQuery } from "src/domain/order/queries/get-order.query";
+import { CreateOrderCommand } from "src/module/order/commands/create-order.command";
+import { GetOrderQuery } from "src/module/order/queries/get-order.query";
+import { OrderController } from "src/module/order/order.controller";
 
 describe("OrdersController", () => {
   let controller: OrderController;

@@ -1,12 +1,13 @@
 import { Test, TestingModule } from "@nestjs/testing";
 
-import { CreateOrderHandler } from "src/domain/order/commands/handlers/create-order.handler";
-import { CreateOrderCommand } from "src/domain/order/commands/create-order.command";
-import { Order } from "src/domain/order/order.entity";
-import { InMemoryOrderRepository } from "src/infrastructure/order-memory.repository";
-import { OrderService } from "src/domain/order/order.service";
+import { CreateOrderHandler } from "src/module/order/commands/handlers/create-order.handler";
+import { CreateOrderCommand } from "src/module/order/commands/create-order.command";
+import { Order } from "src/module/order/order.entity";
+
+import { OrderService } from "src/module/order/order.service";
 import { DomainException } from "src/common/exceptions/domain.exception";
 import { ErrorCodeEnum } from "src/common/enums/errorCode.enum";
+import { InMemoryOrderRepository } from "src/infrastructure/db/order-memory.repository";
 
 describe("CreateOrderHandler", () => {
   let handler: CreateOrderHandler;

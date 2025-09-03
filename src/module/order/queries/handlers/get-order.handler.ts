@@ -3,7 +3,7 @@ import { Inject } from "@nestjs/common";
 
 import { GetOrderQuery } from "../get-order.query";
 import type { Order } from "../../order.entity";
-import type { IOrderRepository } from "src/domain/order/order.repository";
+import type { IOrderRepository } from "src/module/order/order.repository";
 
 @QueryHandler(GetOrderQuery)
 export class GetOrdersHandler implements IQueryHandler<GetOrderQuery> {

@@ -9,12 +9,11 @@ import {
   ApiOkResponse,
   ApiBody,
 } from "@nestjs/swagger";
-
-import { CreateOrderCommand } from "./commands/create-order.command";
-import { GetOrderQuery } from "./queries/get-order.query";
-import { GetOrderListResDto } from "./dto/response/getOrderList.dto";
-import { Order } from "./order.entity";
-import { CreateOrderReqDto } from "./dto/request/createOrder.dto";
+import { CreateOrderReqDto } from "src/module/order/dto/request/createOrder.dto";
+import { CreateOrderCommand } from "src/module/order/commands/create-order.command";
+import { GetOrderListResDto } from "src/module/order/dto/response/getOrderList.dto";
+import { GetOrderQuery } from "src/module/order/queries/get-order.query";
+import { Order } from "src/module/order/order.entity";
 
 @ApiTags("Order")
 @Controller("order")

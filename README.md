@@ -47,4 +47,7 @@ pre-commit 설치
   - Domain Exception은 핸들러에서 Application Exception으로 변환하는 과정 필요
 - DTO는 엔드포인트별로 생성하기에, controller 메서드 명을 기반으로 DTO 명칭 정한다
   - List로 명칭 정해져도, 안에 내용이 단순 요소 한개만 다루고 스웨거상 LIST 표시 할수도 있다
+- CQRS 구조여도 NestJS는 모듈 단위로 DI를 수행하기에, 도메인 폴더 대신 모듈 폴더가 더 직관적이다
+  - 폴더 구조를 계층(presentation, domain, application...) vs 모듈일때 우선은 모듈로 수행하고, 계층은 논리적으로 접근
+  - infrastructure은 변동성을 고려해 주입 구현체 관리 폴더
 ```

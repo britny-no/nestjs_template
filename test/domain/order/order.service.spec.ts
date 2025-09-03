@@ -1,7 +1,7 @@
 import { Test, TestingModule } from "@nestjs/testing";
 
-import { OrderService } from "src/domain/order/order.service";
-import { IOrderRepository } from "src/domain/order/order.repository";
+import { OrderService } from "src/module/order/order.service";
+import { IOrderRepository } from "src/module/order/order.repository";
 import { DomainException } from "src/common/exceptions/domain.exception";
 import { ErrorCodeEnum } from "src/common/enums/errorCode.enum";
 

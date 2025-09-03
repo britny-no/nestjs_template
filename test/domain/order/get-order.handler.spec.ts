@@ -1,10 +1,10 @@
 import { Test, TestingModule } from "@nestjs/testing";
 
-import { GetOrdersHandler } from "src/domain/order/queries/handlers/get-order.handler";
-import { InMemoryOrderRepository } from "src/infrastructure/order-memory.repository";
-import { IOrderRepository } from "src/domain/order/order.repository";
-import { Order } from "src/domain/order/order.entity";
-import { GetOrderQuery } from "src/domain/order/queries/get-order.query";
+import { GetOrdersHandler } from "src/module/order/queries/handlers/get-order.handler";
+import { IOrderRepository } from "src/module/order/order.repository";
+import { Order } from "src/module/order/order.entity";
+import { GetOrderQuery } from "src/module/order/queries/get-order.query";
+import { InMemoryOrderRepository } from "src/infrastructure/db/order-memory.repository";
 
 describe("GetOrdersHandler", () => {
   let handler: GetOrdersHandler;

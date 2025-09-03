@@ -3,7 +3,7 @@ import { Inject } from "@nestjs/common";
 
 import { CreateOrderCommand } from "../create-order.command";
 import { Order } from "../../order.entity";
-import type { IOrderRepository } from "src/domain/order/order.repository";
+import type { IOrderRepository } from "src/module/order/order.repository";
 import { OrderService } from "../../order.service";
 
 @CommandHandler(CreateOrderCommand)

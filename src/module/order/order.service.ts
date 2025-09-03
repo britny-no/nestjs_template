@@ -1,6 +1,6 @@
 import { Injectable, Inject } from "@nestjs/common";
 
-import type { IOrderRepository } from "src/domain/order/order.repository";
+import type { IOrderRepository } from "src/module/order/order.repository";
 import { DomainException } from "src/common/exceptions/domain.exception";
 import { ErrorCodeEnum } from "src/common/enums/errorCode.enum";
 

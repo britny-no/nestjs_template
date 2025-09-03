@@ -1,6 +1,6 @@
-import { IOrderRepository } from "src/domain/order/order.repository";
-import { Order } from "src/domain/order/order.entity";
-import { MemoryDatabaseException } from "./exceptions/infrastructure.exception";
+import { IOrderRepository } from "src/module/order/order.repository";
+import { Order } from "src/module/order/order.entity";
+import { MemoryDatabaseException } from "../exceptions/memoryDatabaseException";
 
 export class InMemoryOrderRepository implements IOrderRepository {
   private orders: Order[] = [];

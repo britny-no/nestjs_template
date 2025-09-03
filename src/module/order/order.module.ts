@@ -1,10 +1,10 @@
 import { Module } from "@nestjs/common";
-import { OrderController } from "./order.controller";
 import { CqrsModule } from "@nestjs/cqrs";
 import { OrderService } from "./order.service";
-import { InMemoryOrderRepository } from "src/infrastructure/order-memory.repository";
 import { GetOrdersHandler } from "./queries/handlers/get-order.handler";
 import { CreateOrderHandler } from "./commands/handlers/create-order.handler";
+import { OrderController } from "src/module/order/order.controller";
+import { InMemoryOrderRepository } from "src/infrastructure/db/order-memory.repository";
 
 @Module({
   imports: [CqrsModule],
