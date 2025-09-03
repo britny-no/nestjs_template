@@ -1,0 +1,7 @@
+export enum DetailCodeEnum {
+  INVALID_DATA = "INVALID_DATA",
+  CANT_EMPTY = "CANT_EMPTY",
+  NOT_A_NUMBER = "NOT_A_NUMBER",
+  NOT_A_STRING = "NOT_A_STRING",
+  LACK_MIN = "LACK_MIN",
+}

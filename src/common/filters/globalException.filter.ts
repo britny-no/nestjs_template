@@ -9,12 +9,14 @@ import { Response } from "express";
 import { DomainException } from "../exceptions/domain.exception";
 import { ErrorCodeEnum } from "../enums/errorCode.enum";
 import { InfrastructureException } from "../exceptions/infrastructure.exception";
+import { ValidationException } from "../exceptions/validation.exception";
 
 const ErrorCodeHttpStatusMap = {
   [ErrorCodeEnum.NOT_FOUND]: HttpStatus.NOT_FOUND,
   [ErrorCodeEnum.UNAUTHORIZED]: HttpStatus.UNAUTHORIZED,
   [ErrorCodeEnum.ALREADY_REGISTERED]: HttpStatus.BAD_REQUEST,
   [ErrorCodeEnum.DB_ERROR]: HttpStatus.INTERNAL_SERVER_ERROR,
+  [ErrorCodeEnum.INVALID_DATA_TYPE]: HttpStatus.UNPROCESSABLE_ENTITY,
 } satisfies Record<ErrorCodeEnum, number>;
 
 @Catch()
@@ -40,10 +42,19 @@ export class GlobalExceptionFilter implements ExceptionFilter {
       });
     }
 
+    if (exception instanceof ValidationException) {
+      const status = HttpStatus.UNPROCESSABLE_ENTITY;
+
+      this.logger.error(`[ValidationException] ${exception.message}`);
+
+      return response.status(status).json({
+        code: exception.code,
+        message: exception.message,
+      });
+    }
+
     if (exception instanceof InfrastructureException) {
-      const status =
-        ErrorCodeHttpStatusMap[exception.code] ??
-        HttpStatus.INTERNAL_SERVER_ERROR;
+      const status = HttpStatus.INTERNAL_SERVER_ERROR;
 
       this.logger.error(
         `[InfrastructureException] ${exception.message}`,

@@ -45,4 +45,6 @@ pre-commit 설치
   - Infrastructure Exception은 추상화
 - Application(NestJs)/Infrastructure Exception GlobalFilter에서 catch 하도록
   - Domain Exception은 핸들러에서 Application Exception으로 변환하는 과정 필요
+- DTO는 엔드포인트별로 생성하기에, controller 메서드 명을 기반으로 DTO 명칭 정한다
+  - List로 명칭 정해져도, 안에 내용이 단순 요소 한개만 다루고 스웨거상 LIST 표시 할수도 있다
 ```

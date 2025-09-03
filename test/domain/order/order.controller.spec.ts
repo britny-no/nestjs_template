@@ -38,7 +38,7 @@ describe("OrdersController", () => {
   });
 
   it("should call QueryBus.execute on getOrders", async () => {
-    await controller.getOrders();
+    await controller.getOrderList();
     expect(queryBus.execute).toHaveBeenCalledWith(new GetOrderQuery());
   });
 });
