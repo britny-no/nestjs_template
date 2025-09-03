@@ -2,7 +2,7 @@ import { Test, TestingModule } from "@nestjs/testing";
 import { OrderController } from "src/domain/order/order.controller";
 import { CommandBus, QueryBus } from "@nestjs/cqrs";
 import { CreateOrderCommand } from "src/domain/order/commands/create-order.command";
-import { GetOrdersQuery } from "src/domain/order/queries/get-order.query";
+import { GetOrderQuery } from "src/domain/order/queries/get-order.query";
 
 describe("OrdersController", () => {
   let controller: OrderController;
@@ -39,6 +39,6 @@ describe("OrdersController", () => {
 
   it("should call QueryBus.execute on getOrders", async () => {
     await controller.getOrders();
-    expect(queryBus.execute).toHaveBeenCalledWith(new GetOrdersQuery());
+    expect(queryBus.execute).toHaveBeenCalledWith(new GetOrderQuery());
   });
 });

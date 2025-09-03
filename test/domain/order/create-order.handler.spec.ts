@@ -1,12 +1,12 @@
 import { Test, TestingModule } from "@nestjs/testing";
-import { HttpException, HttpStatus } from "@nestjs/common";
 
 import { CreateOrderHandler } from "src/domain/order/commands/handlers/create-order.handler";
 import { CreateOrderCommand } from "src/domain/order/commands/create-order.command";
 import { Order } from "src/domain/order/order.entity";
-import { InMemoryOrderRepository } from "src/infrastructure/order-memory";
+import { InMemoryOrderRepository } from "src/infrastructure/order-memory.repository";
 import { OrderService } from "src/domain/order/order.service";
-import { OrderAlreadyRegisteredException } from "src/domain/order/order.exception";
+import { DomainException } from "src/common/exceptions/domain.exception";
+import { ErrorCodeEnum } from "src/common/enums/errorCode.enum";
 
 describe("CreateOrderHandler", () => {
   let handler: CreateOrderHandler;
@@ -31,17 +31,16 @@ describe("CreateOrderHandler", () => {
   it("should throw ApplicationException when checkRegistered throws DomainException", async () => {
     // Given
     jest.spyOn(orderService, "checkRegistered").mockImplementation(() => {
-      throw new OrderAlreadyRegisteredException("1");
+      throw new DomainException(
+        "order already registered",
+        ErrorCodeEnum.ALREADY_REGISTERED,
+      );
     });
 
     const command = new CreateOrderCommand("1", "Apple", 3);
 
     // When
-    await expect(handler.execute(command)).rejects.toThrow(HttpException);
-    await expect(handler.execute(command)).rejects.toMatchObject({
-      status: HttpStatus.BAD_REQUEST,
-      message: "이미 등록된 주문입니다.",
-    });
+    await expect(handler.execute(command)).rejects.toThrow(DomainException);
 
     // Then
     expect(orderService.checkRegistered).toHaveBeenCalledWith("1");

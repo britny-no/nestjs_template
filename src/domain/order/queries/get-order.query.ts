@@ -1,1 +1,1 @@
-export class GetOrdersQuery {}
+export class GetOrderQuery {}

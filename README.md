@@ -41,5 +41,8 @@ pre-commit 설치
 - exception 종류: HttpException, DomainException
   - 전통적 방식이면 HttpException 비중을 늘리고, CQRS에 NestJS 종속성을 줄이고 싶으면 DomainException 비중을 늘린다
 - 핸들러에서 command/query/event 파라미터 사용되지 않으면, _앞에 붙이기
-- Domain/Application(NestJs)/Infrastructure Exception GlobalFilter에서 catch 하도록
+- Domain Exception은 추상화 하지 않는다. 사례 조금더 발견되면 추상화
+  - Infrastructure Exception은 추상화
+- Application(NestJs)/Infrastructure Exception GlobalFilter에서 catch 하도록
+  - Domain Exception은 핸들러에서 Application Exception으로 변환하는 과정 필요
 ```

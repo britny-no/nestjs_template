@@ -1,9 +1,10 @@
 import { Test, TestingModule } from "@nestjs/testing";
+
 import { GetOrdersHandler } from "src/domain/order/queries/handlers/get-order.handler";
-import { InMemoryOrderRepository } from "src/infrastructure/order-memory";
+import { InMemoryOrderRepository } from "src/infrastructure/order-memory.repository";
 import { IOrderRepository } from "src/domain/order/order.repository";
 import { Order } from "src/domain/order/order.entity";
-import { GetOrdersQuery } from "src/domain/order/queries/get-order.query";
+import { GetOrderQuery } from "src/domain/order/queries/get-order.query";
 
 describe("GetOrdersHandler", () => {
   let handler: GetOrdersHandler;
@@ -26,7 +27,7 @@ describe("GetOrdersHandler", () => {
 
   it("should return an array of orders", async () => {
     // Given
-    const query = new GetOrdersQuery();
+    const query = new GetOrderQuery();
     const order1 = new Order("1", "itemA", 2);
     const order2 = new Order("2", "itemB", 1);
 

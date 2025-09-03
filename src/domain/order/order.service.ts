@@ -1,7 +1,8 @@
 import { Injectable, Inject } from "@nestjs/common";
 
 import type { IOrderRepository } from "src/domain/order/order.repository";
-import { OrderAlreadyRegisteredException } from "./order.exception";
+import { DomainException } from "src/common/exceptions/domain.exception";
+import { ErrorCodeEnum } from "src/common/enums/errorCode.enum";
 
 @Injectable()
 export class OrderService {
@@ -14,7 +15,10 @@ export class OrderService {
     const order = await this.orderRepository.findById(id);
 
     if (order) {
-      throw new OrderAlreadyRegisteredException(id);
+      throw new DomainException(
+        "order already registered",
+        ErrorCodeEnum.ALREADY_REGISTERED,
+      );
     }
   }
 }

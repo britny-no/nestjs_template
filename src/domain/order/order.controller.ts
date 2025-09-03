@@ -1,7 +1,7 @@
 import { Controller, Post, Body, Get } from "@nestjs/common";
 import { CommandBus, QueryBus } from "@nestjs/cqrs";
 import { CreateOrderCommand } from "./commands/create-order.command";
-import { GetOrdersQuery } from "./queries/get-order.query";
+import { GetOrderQuery } from "./queries/get-order.query";
 
 @Controller("order")
 export class OrderController {
@@ -22,7 +22,7 @@ export class OrderController {
 
   @Get()
   async getOrders() {
-    await this.queryBus.execute(new GetOrdersQuery());
+    await this.queryBus.execute(new GetOrderQuery());
     return;
   }
 }

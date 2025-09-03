@@ -2,7 +2,8 @@ import { Test, TestingModule } from "@nestjs/testing";
 
 import { OrderService } from "src/domain/order/order.service";
 import { IOrderRepository } from "src/domain/order/order.repository";
-import { OrderAlreadyRegisteredException } from "src/domain/order/order.exception";
+import { DomainException } from "src/common/exceptions/domain.exception";
+import { ErrorCodeEnum } from "src/common/enums/errorCode.enum";
 
 describe("OrderService", () => {
   let service: OrderService;
@@ -36,13 +37,16 @@ describe("OrderService", () => {
     expect(orderRepository.findById).toHaveBeenCalledWith("123");
   });
 
-  it("should throw OrderAlreadyRegisteredException when order exists", async () => {
+  it("should throw DomainException when order exists", async () => {
     // Given
     (orderRepository.findById as jest.Mock).mockResolvedValue({ id: "123" });
 
     // When
     await expect(service.checkRegistered("123")).rejects.toThrow(
-      OrderAlreadyRegisteredException,
+      new DomainException(
+        "order already registered",
+        ErrorCodeEnum.ALREADY_REGISTERED,
+      ),
     );
 
     // Then
