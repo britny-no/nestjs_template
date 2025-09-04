@@ -1,19 +1,18 @@
 import { Test, TestingModule } from "@nestjs/testing";
 
-import { GetOrdersHandler } from "src/module/order/queries/handlers/get-order.handler";
 import { IOrderRepository } from "src/module/order/order.repository";
 import { Order } from "src/module/order/order.entity";
-import { GetOrderQuery } from "src/module/order/queries/get-order.query";
 import { InMemoryOrderRepository } from "src/infrastructure/db/order-memory.repository";
+import { GetOrderListUseCase } from "src/module/order/use-cases/get-order-list.use-case";
 
-describe("GetOrdersHandler", () => {
-  let handler: GetOrdersHandler;
+describe("GetOrderListUseCase", () => {
+  let useCase: GetOrderListUseCase;
   let repository: IOrderRepository;
 
   beforeEach(async () => {
     const module: TestingModule = await Test.createTestingModule({
       providers: [
-        GetOrdersHandler,
+        GetOrderListUseCase,
         {
           provide: "IOrderRepository",
           useClass: InMemoryOrderRepository,
@@ -21,13 +20,12 @@ describe("GetOrdersHandler", () => {
       ],
     }).compile();
 
-    handler = module.get<GetOrdersHandler>(GetOrdersHandler);
+    useCase = module.get<GetOrderListUseCase>(GetOrderListUseCase);
     repository = module.get<IOrderRepository>("IOrderRepository");
   });
 
   it("should return an array of orders", async () => {
     // Given
-    const query = new GetOrderQuery();
     const order1 = new Order("1", "itemA", 2);
     const order2 = new Order("2", "itemB", 1);
 
@@ -35,7 +33,7 @@ describe("GetOrdersHandler", () => {
     await repository.save(order2);
 
     // When
-    const result: Order[] = await handler.execute(query);
+    const result: Order[] = await useCase.execute();
 
     // Then
     expect(result).toHaveLength(2);

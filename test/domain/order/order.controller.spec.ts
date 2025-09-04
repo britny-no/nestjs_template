@@ -1,45 +1,55 @@
 import { Test, TestingModule } from "@nestjs/testing";
+import { CreateOrderReqDto } from "src/module/order/dto/request/createOrder.dto";
 
-import { CommandBus, QueryBus } from "@nestjs/cqrs";
-import { CreateOrderCommand } from "src/module/order/commands/create-order.command";
-import { GetOrderQuery } from "src/module/order/queries/get-order.query";
 import { OrderController } from "src/module/order/order.controller";
+import { CreateOrderUseCase } from "src/module/order/use-cases/create-order.use-case";
+import { GetOrderListUseCase } from "src/module/order/use-cases/get-order-list.use-case";
 
 describe("OrdersController", () => {
   let controller: OrderController;
-  let commandBus: CommandBus;
-  let queryBus: QueryBus;
+  let createOrderUseCase: CreateOrderUseCase;
+  let getOrderListUseCase: GetOrderListUseCase;
 
   beforeEach(async () => {
     const module: TestingModule = await Test.createTestingModule({
       controllers: [OrderController],
       providers: [
         {
-          provide: CommandBus,
+          provide: CreateOrderUseCase,
           useValue: { execute: jest.fn() },
         },
         {
-          provide: QueryBus,
+          provide: GetOrderListUseCase,
           useValue: { execute: jest.fn() },
         },
       ],
     }).compile();
 
     controller = module.get<OrderController>(OrderController);
-    commandBus = module.get<CommandBus>(CommandBus);
-    queryBus = module.get<QueryBus>(QueryBus);
+    createOrderUseCase = module.get<CreateOrderUseCase>(CreateOrderUseCase);
+    getOrderListUseCase = module.get<GetOrderListUseCase>(GetOrderListUseCase);
   });
 
   it("should call CommandBus.execute on createOrder", async () => {
-    const dto = { id: "1", item: "Apple", quantity: 3 };
+    // Given
+    const dto = new CreateOrderReqDto();
+    dto.id = "1";
+    dto.item = "Apple";
+    dto.quantity = 3;
+
+    // When
     await controller.createOrder(dto);
-    expect(commandBus.execute).toHaveBeenCalledWith(
-      new CreateOrderCommand("1", "Apple", 3),
-    );
+
+    // Then
+    expect(createOrderUseCase.execute).toHaveBeenCalledWith(dto);
   });
 
   it("should call QueryBus.execute on getOrders", async () => {
+    // Given
+    // When
     await controller.getOrderList();
-    expect(queryBus.execute).toHaveBeenCalledWith(new GetOrderQuery());
+
+    // Then
+    expect(getOrderListUseCase.execute).toHaveBeenCalledWith();
   });
 });

@@ -1,5 +1,4 @@
 import { Controller, Post, Body, Get } from "@nestjs/common";
-import { CommandBus, QueryBus } from "@nestjs/cqrs";
 import { plainToInstance } from "class-transformer";
 import {
   ApiTags,
@@ -10,17 +9,17 @@ import {
   ApiBody,
 } from "@nestjs/swagger";
 import { CreateOrderReqDto } from "src/module/order/dto/request/createOrder.dto";
-import { CreateOrderCommand } from "src/module/order/commands/create-order.command";
 import { GetOrderListResDto } from "src/module/order/dto/response/getOrderList.dto";
-import { GetOrderQuery } from "src/module/order/queries/get-order.query";
 import { Order } from "src/module/order/order.entity";
+import { CreateOrderUseCase } from "./use-cases/create-order.use-case";
+import { GetOrderListUseCase } from "./use-cases/get-order-list.use-case";
 
 @ApiTags("Order")
 @Controller("order")
 export class OrderController {
   constructor(
-    private readonly commandBus: CommandBus,
-    private readonly queryBus: QueryBus,
+    private readonly createOrderUseCase: CreateOrderUseCase,
+    private readonly getOrderListUseCase: GetOrderListUseCase,
   ) {}
 
   @ApiOperation({
@@ -30,9 +29,7 @@ export class OrderController {
   @ApiBody({ type: CreateOrderReqDto })
   @Post()
   async createOrder(@Body() body: CreateOrderReqDto) {
-    await this.commandBus.execute(
-      new CreateOrderCommand(body.id, body.item, body.quantity),
-    );
+    await this.createOrderUseCase.execute(body);
     return;
   }
 
@@ -49,7 +46,7 @@ export class OrderController {
   })
   @Get("/list")
   async getOrderList(): Promise<GetOrderListResDto[]> {
-    const orders: Order[] = await this.queryBus.execute(new GetOrderQuery());
+    const orders: Order[] = await this.getOrderListUseCase.execute();
 
     return plainToInstance(GetOrderListResDto, orders);
   }

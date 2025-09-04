@@ -1,23 +1,23 @@
 import { Test, TestingModule } from "@nestjs/testing";
 
-import { CreateOrderHandler } from "src/module/order/commands/handlers/create-order.handler";
-import { CreateOrderCommand } from "src/module/order/commands/create-order.command";
 import { Order } from "src/module/order/order.entity";
 
 import { OrderService } from "src/module/order/order.service";
 import { DomainException } from "src/common/exceptions/domain.exception";
 import { ErrorCodeEnum } from "src/common/enums/errorCode.enum";
 import { InMemoryOrderRepository } from "src/infrastructure/db/order-memory.repository";
+import { CreateOrderReqDto } from "src/module/order/dto/request/createOrder.dto";
+import { CreateOrderUseCase } from "src/module/order/use-cases/create-order.use-case";
 
-describe("CreateOrderHandler", () => {
-  let handler: CreateOrderHandler;
+describe("CreateOrderUseCase", () => {
+  let useCase: CreateOrderUseCase;
   let orderService: OrderService;
 
   beforeEach(async () => {
     const module: TestingModule = await Test.createTestingModule({
       providers: [
         OrderService,
-        CreateOrderHandler,
+        CreateOrderUseCase,
         {
           provide: "IOrderRepository",
           useClass: InMemoryOrderRepository,
@@ -25,7 +25,7 @@ describe("CreateOrderHandler", () => {
       ],
     }).compile();
 
-    handler = module.get<CreateOrderHandler>(CreateOrderHandler);
+    useCase = module.get<CreateOrderUseCase>(CreateOrderUseCase);
     orderService = module.get<OrderService>(OrderService);
   });
 
@@ -38,10 +38,13 @@ describe("CreateOrderHandler", () => {
       );
     });
 
-    const command = new CreateOrderCommand("1", "Apple", 3);
+    const dto = new CreateOrderReqDto();
+    dto.id = "1";
+    dto.item = "Apple";
+    dto.quantity = 3;
 
     // When
-    await expect(handler.execute(command)).rejects.toThrow(DomainException);
+    await expect(useCase.execute(dto)).rejects.toThrow(DomainException);
 
     // Then
     expect(orderService.checkRegistered).toHaveBeenCalledWith("1");
@@ -49,10 +52,13 @@ describe("CreateOrderHandler", () => {
 
   it("should create an order", async () => {
     // Given
-    const command = new CreateOrderCommand("1", "Apple", 3);
+    const dto = new CreateOrderReqDto();
+    dto.id = "1";
+    dto.item = "Apple";
+    dto.quantity = 3;
 
     // When
-    const result: Order = await handler.execute(command);
+    const result: Order = await useCase.execute(dto);
 
     // Then
     expect(result).toBeInstanceOf(Order);
